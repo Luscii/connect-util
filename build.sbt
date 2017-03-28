@@ -10,7 +10,14 @@ val commonSettings = Seq(
   scalaVersion := "2.11.8",
   scalacOptions ++= Seq("-unchecked", "-feature", "-explaintypes", "-deprecation"),
   autoCompilerPlugins := true,
-  releaseIgnoreUntrackedFiles := true
+  releaseIgnoreUntrackedFiles := true,
+  publishTo := {
+    val nexus = "https://nexus.focuscura.nl/repository/"
+    if (isSnapshot.value)
+      Some("snapshots" at nexus + "maven-snapshots")
+    else
+      Some("releases"  at nexus + "maven-releases")
+  }
 )
 
 lazy val `connect-http-client` = project
@@ -26,13 +33,7 @@ lazy val root = project.in(file("."))
   .settings(commonSettings)
 
 
-publishTo := {
-  val nexus = "https://nexus.focuscura.nl/repository/"
-  if (isSnapshot.value)
-    Some("snapshots" at nexus + "maven-snapshots")
-  else
-    Some("releases"  at nexus + "maven-releases")
-}
+
 
 
 
