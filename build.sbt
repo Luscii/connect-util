@@ -31,6 +31,7 @@ lazy val `connect-http-client` = project
 lazy val root = project.in(file("."))
   .aggregate(`connect-http-client`)
   .settings(commonSettings)
+  .settings(releaseProcess := Seq.empty)
 
 
 
